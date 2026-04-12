@@ -1,0 +1,43 @@
+{
+    "Items": [
+        {
+            "ts": {
+                "S": "2026-04-11T22:55:37.927167+00:00"
+            },
+            "windowSize": {
+                "N": "5"
+            },
+            "metrics": {
+                "M": {
+                    "severity": {
+                        "S": "CRITICAL"
+                    },
+                    "turbidity_ntu": {
+                        "N": "41.188"
+                    },
+                    "rainfall_mm_h": {
+                        "N": "15.72"
+                    },
+                    "water_temp_c": {
+                        "N": "6.004"
+                    },
+                    "water_level_m": {
+                        "N": "2.455"
+                    },
+                    "flow_rate_m3s": {
+                        "N": "54.376"
+                    }
+                }
+            },
+            "severity": {
+                "S": "CRITICAL"
+            },
+            "stationId": {
+                "S": "dublin-liffey-01"
+            }
+        }
+    ],
+    "Count": 1,
+    "ScannedCount": 1,
+    "ConsumedCapacity": null
+}

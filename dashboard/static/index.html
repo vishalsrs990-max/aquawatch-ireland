@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AquaWatch Ireland Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/config.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <h1>AquaWatch Ireland</h1>
+      <p>Real-time Dublin river monitoring dashboard</p>
+    </div>
+
+    <div class="controls">
+      <label>
+        Station
+        <input id="stationId" value="dublin-liffey-01" />
+      </label>
+      <button id="refreshBtn" type="button">Refresh</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="status-bar">
+      <div class="pill" id="severityPill">Severity: --</div>
+      <div class="pill" id="triggeredPill">Triggered by: --</div>
+      <div class="pill" id="updatedPill">Updated: --</div>
+      <div class="pill" id="apiPill">API: --</div>
+    </section>
+
+    <section class="cards" id="cards"></section>
+
+    <section class="charts">
+      <div class="panel chart-panel">
+        <h3>Water Level (m)</h3>
+        <div class="chart-box">
+          <canvas id="waterLevelChart"></canvas>
+        </div>
+      </div>
+
+      <div class="panel chart-panel">
+        <h3>Rainfall (mm/h)</h3>
+        <div class="chart-box">
+          <canvas id="rainfallChart"></canvas>
+        </div>
+      </div>
+
+      <div class="panel chart-panel">
+        <h3>Water Temperature (°C)</h3>
+        <div class="chart-box">
+          <canvas id="tempChart"></canvas>
+        </div>
+      </div>
+
+      <div class="panel chart-panel">
+        <h3>Turbidity (NTU)</h3>
+        <div class="chart-box">
+          <canvas id="turbidityChart"></canvas>
+        </div>
+      </div>
+
+      <div class="panel chart-panel">
+        <h3>Flow Rate (m³/s)</h3>
+        <div class="chart-box">
+          <canvas id="flowChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="history-header">
+        <h3>Recent History</h3>
+        <span id="rowCount">0 rows</span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Severity</th>
+              <th>Triggered by</th>
+              <th>Water level</th>
+              <th>Rainfall</th>
+              <th>Temp</th>
+              <th>Turbidity</th>
+              <th>Flow</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

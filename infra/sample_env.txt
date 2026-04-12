@@ -1,0 +1,9 @@
+AWS_REGION=us-east-1
+IOT_ENDPOINT=xxxxxxxxxxxxx-ats.iot.us-east-1.amazonaws.com
+MQTT_TOPIC_TEMPLATE=aquawatch/{station_id}/aggregated
+WINDOW_SIZE=5
+FOG_URL=http://127.0.0.1:8000/ingest
+DASHBOARD_API_BASE=https://YOUR_HTTP_API.execute-api.us-east-1.amazonaws.com
+LATEST_TABLE=AquaLatest
+HISTORY_TABLE=AquaHistory
+DEFAULT_STATION=dublin-liffey-01

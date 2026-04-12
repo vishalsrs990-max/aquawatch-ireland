@@ -1,0 +1,36 @@
+name: Deploy AquaWatch Dashboard to Elastic Beanstalk
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'dashboard/**'
+      - '.github/workflows/deploy-eb.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build deployment bundle
+        run: |
+          cd dashboard
+          zip -r ../dashboard-eb.zip .
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to Elastic Beanstalk
+        uses: aws-actions/aws-elasticbeanstalk-deploy@v1.0.0
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          application-name: ${{ secrets.EB_APPLICATION_NAME }}
+          environment-name: ${{ secrets.EB_ENVIRONMENT_NAME }}
+          deployment-package-path: dashboard-eb.zip
