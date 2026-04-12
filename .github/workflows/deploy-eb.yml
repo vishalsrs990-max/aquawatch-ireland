@@ -2,35 +2,46 @@ name: Deploy AquaWatch Dashboard to Elastic Beanstalk
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-      - 'dashboard/**'
-      - '.github/workflows/deploy-eb.yml'
+      - "dashboard/**"
+      - ".github/workflows/deploy-eb.yml"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    env:
+      AWS_REGION: us-east-1
+      APPLICATION_NAME: aquawatch-dashboard
+      ENVIRONMENT_NAME: Aquawatch-dashboard-env
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Build deployment bundle
         run: |
           cd dashboard
-          zip -r ../dashboard-eb.zip .
+          zip -r ../dashboard-eb.zip application.py requirements.txt Procfile static
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-east-1
 
       - name: Deploy to Elastic Beanstalk
         uses: aws-actions/aws-elasticbeanstalk-deploy@v1.0.0
         with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          application-name: ${{ secrets.EB_APPLICATION_NAME }}
-          environment-name: ${{ secrets.EB_ENVIRONMENT_NAME }}
+          aws-region: us-east-1
+          application-name: aquawatch-dashboard
+          environment-name: Aquawatch-dashboard-env
+          version-label: ${{ github.sha }}
           deployment-package-path: dashboard-eb.zip
+          wait-for-deployment: true
+          wait-for-environment-recovery: true
