@@ -294,5 +294,5 @@ Use these points:
 - **Scalability**: IoT Core + SQS + Lambda decouple ingestion from processing
 - **Fault tolerance**: SQS buffers burst traffic
 - **Observability**: CloudWatch logs for fog, Lambda, and EB
-- **Responsive UI**: dashboard cards + trend charts + history table
+- **Responsive UI**: dashboard cards + trend charts + history tables
 
