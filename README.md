@@ -260,9 +260,7 @@ Create these repo secrets:
 - `EB_APPLICATION_NAME`
 - `EB_ENVIRONMENT_NAME`
 
-## 9) Demo checklist
-
-Before your class demo, confirm all of these:
+## 9)  checklist
 
 - Simulator sends data every few seconds
 - Fog node validates + aggregates
